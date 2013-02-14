@@ -559,7 +559,6 @@ struct {                                                                \
     if (!TAILQ_EMPTY(head2)) {                                          \
         *(head1)->tqh_last = (head2)->tqh_first;                        \
         (head2)->tqh_first->field.tqe_prev = (head1)->tqh_last;         \
-        (head1)->tqh_last = (head2)->tqh_last;                          \
         TAILQ_INIT((head2));                                            \
         QMD_TRACE_HEAD(head1);                                          \
         QMD_TRACE_HEAD(head2);                                          \
@@ -639,7 +638,6 @@ struct {                                                                \
     (elm)->field.tqe_prev = (head)->tqh_last;                           \
     *(head)->tqh_last = (elm);                                          \
     (head)->tqh_last = &TAILQ_NEXT((elm), field);                       \
-    QMD_TRACE_HEAD(head);                                               \
     QMD_TRACE_ELEM(&(elm)->field);                                      \
 } while (0)
 

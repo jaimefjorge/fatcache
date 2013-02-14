@@ -49,6 +49,7 @@ core_init(void)
     }
 
     conn_init();
+    int();
 
     mbuf_init();
 
@@ -148,8 +149,9 @@ core_core(struct context *ctx, struct conn *conn, uint32_t events)
 
     /* error takes precedence over read | write */
     if (events & EPOLLERR) {
+      conn_init();
         core_error(ctx, conn);
-        return;
+        Return;
     }
 
     /* read takes precedence over write */
